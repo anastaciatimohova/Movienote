@@ -13,7 +13,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 DROP SCHEMA IF EXISTS `movienote` ;
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema movienote
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `movienote` DEFAULT CHARACTER SET utf8 ;
 SHOW WARNINGS;
@@ -57,11 +57,10 @@ SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `movies` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `adult` BOOLEAN NOT NULL,
-  `backdrop_path` VARCHAR(1245) NOT NULL,
+  `backdrop_path` BLOB NOT NULL,
   `original_language` VARCHAR(45) NOT NULL,
   `original_title` VARCHAR(1245) NOT NULL,
   `overview` VARCHAR(1245) NOT NULL,
-  `genres_ids` VARCHAR(1245) NOT NULL,
   `external_id` BIGINT NOT NULL,
   PRIMARY KEY (`id`));
 
