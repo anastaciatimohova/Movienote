@@ -2,6 +2,9 @@ plugins {
     id 'org.springframework.boot' version '2.5.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+
+
+    id 'org.liquibase.gradle' version '1.1.1'
 }
 
 group = 'com'
@@ -14,17 +17,26 @@ configurations {
     }
 }
 
+
 repositories {
     mavenCentral()
 }
+
+
+
+
+
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.projectlombok:lombok'
 
-    runtimeOnly 'com.h2database:h2:1.4.200'
+    compile('org.springframework.boot:spring-boot-starter')
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+    implementation("org.liquibase:liquibase-core")
+
+    compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -34,5 +46,3 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-
-
