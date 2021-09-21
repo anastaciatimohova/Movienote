@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS roles(
     name VARCHAR(225)       NOT NULL
 ) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS users_has_roles(
+CREATE TABLE IF NOT EXISTS user_roles(
     user_id BIGINT,
     role_id BIGINT,
     FOREIGN KEY (user_id) REFERENCES users (id),
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS movies(
     external_id       BIGINT             NOT NULL
 ) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS movies_has_genres(
+CREATE TABLE IF NOT EXISTS movie_genres(
     movies_id BIGINT NOT NULL,
     genres_id BIGINT NOT NULL,
     FOREIGN KEY (movies_id) REFERENCES movies (id),
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS movies_has_genres(
         ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS users_has_movies(
+CREATE TABLE IF NOT EXISTS user_movies(
     users_id           BIGINT PRIMARY KEY NOT NULL,
     description        TEXT               NULL,
     rating             INT                NULL,
