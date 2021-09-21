@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS roles(
     name VARCHAR(225)       NOT NULL
 ) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS user_roles(
+CREATE TABLE IF NOT EXISTS users_has_roles(
     user_id BIGINT,
     role_id BIGINT,
     FOREIGN KEY (user_id) REFERENCES users (id),
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS genres(
 CREATE TABLE IF NOT EXISTS movies(
     id                BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     adult             BOOLEAN            NOT NULL,
-    backdrop_path     BLOB               NOT NULL,
+    poster            BLOB               NOT NULL,
     original_language VARCHAR(45)        NOT NULL,
     original_title    VARCHAR(1245)      NOT NULL,
     overview          VARCHAR(1245)      NOT NULL,
