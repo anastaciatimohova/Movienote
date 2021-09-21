@@ -4,6 +4,7 @@ plugins {
     id 'java'
 
     id "org.akhikhl.gretty" version "1.2.4"
+    id 'org.liquibase.gradle' version '1.1.1'
 }
 
 group = 'com'
@@ -15,9 +16,39 @@ configurations {
         extendsFrom annotationProcessor
     }
 }
+apply plugin: 'java'
+apply plugin: 'war'
+apply from: 'database.gradle'
 
 repositories {
     mavenCentral()
+}
+
+plugins {
+    id 'org.liquibase.gradle' version '1.1.1'
+}
+
+def dbUser = project.properties['dbUser'] ?: gradle.dbUser
+def dbPassword = project.properties['dbPassword'] ?: gradle.dbPassword
+def dbUrl = project.properties['dbUrl'] ?: gradle.dbUrl
+
+liquibase {
+    activities {
+        //noinspection GroovyAssignabilityCheck
+        main {
+            changeLogFile 'resources/data/changelog/changes/db.changelog-master.xml'
+            url dbUrl
+            username dbUser
+            password dbPassword
+        }
+    }
+}
+task updateDbMain(dependsOn: startDatabase) {
+    group = 'develop'
+    doLast {
+        liquibase.runList = 'main'
+        tasks.update.execute()
+    }
 }
 
 dependencies {
