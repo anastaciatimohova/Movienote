@@ -16,14 +16,6 @@ CREATE TABLE IF NOT EXISTS roles(
     name     VARCHAR(225)       NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS user_roles(
-    user_id BIGINT,
-    role_id BIGINT,
-    FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (role_id) REFERENCES roles (id)
-        ON DELETE CASCADE
-);
-
 CREATE TABLE IF NOT EXISTS status(
     id    SERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(245)       NOT NULL
@@ -45,14 +37,6 @@ CREATE TABLE IF NOT EXISTS movies(
     external_id       BIGINT             NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS movie_genres(
-    movie_id BIGINT NOT NULL,
-    genre_id BIGINT NOT NULL,
-    FOREIGN KEY (movie_id) REFERENCES movies (id),
-    FOREIGN KEY (genre_id) REFERENCES genres (id)
-        ON DELETE CASCADE
-);
-
 CREATE TABLE IF NOT EXISTS user_movies(
     id                SERIAL PRIMARY KEY NOT NULL,
     user_id           BIGINT              NOT NULL,
@@ -65,5 +49,22 @@ CREATE TABLE IF NOT EXISTS user_movies(
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (status_id) REFERENCES status (id),
     FOREIGN KEY (movie_id) REFERENCES movies (id)
+    ON DELETE CASCADE
+    );
+
+CREATE TABLE IF NOT EXISTS user_roles(
+   user_id BIGINT,
+   role_id BIGINT,
+   FOREIGN KEY (user_id) REFERENCES users (id),
+   FOREIGN KEY (role_id) REFERENCES roles (id)
         ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS movie_genres(
+    movie_id BIGINT NOT NULL,
+    genre_id BIGINT NOT NULL,
+    FOREIGN KEY (movie_id) REFERENCES movies (id),
+    FOREIGN KEY (genre_id) REFERENCES genres (id)
+        ON DELETE CASCADE
+);
+
