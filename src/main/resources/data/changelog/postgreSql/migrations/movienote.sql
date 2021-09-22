@@ -46,23 +46,23 @@ CREATE TABLE IF NOT EXISTS movies(
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS movie_genres(
-    movies_id BIGINT NOT NULL,
-    genres_id BIGINT NOT NULL,
-    FOREIGN KEY (movies_id) REFERENCES movies (id),
-    FOREIGN KEY (genres_id) REFERENCES genres (id)
+    movie_id BIGINT NOT NULL,
+    genre_id BIGINT NOT NULL,
+    FOREIGN KEY (movie_id) REFERENCES movies (id),
+    FOREIGN KEY (genre_id) REFERENCES genres (id)
         ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS user_movies(
-    users_id           BIGINT PRIMARY KEY NOT NULL,
+    user_id           BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     description        TEXT               NULL,
     rating             INT                NULL,
     status_id          BIGINT             NOT NULL,
-    movies_id          BIGINT             NOT NULL UNIQUE,
+    movie_id          BIGINT             NOT NULL UNIQUE,
     created_timestamp  TIMESTAMP          NOT NULL,
     modefied_timestamp TIMESTAMP          NOT NULL,
-    FOREIGN KEY (users_id) REFERENCES users (id),
+    FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (status_id) REFERENCES status (id),
-    FOREIGN KEY (movies_id) REFERENCES movies (id)
+    FOREIGN KEY (movie_id) REFERENCES movies (id)
         ON DELETE CASCADE
 ) ENGINE = InnoDB;
