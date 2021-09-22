@@ -10,10 +10,6 @@ import java.util.Set;
  * Объект представляющий пользователя
  * @autor Ilkevich Anastasiya
  * @version 1.0
- *
- * НЕ ЗНАЮ КАК В ТАБЛИЦУ users_has_movies СОЗДАТЬ ПОЛЯ "description", "rating",
- * "created_timastamp" и "modefied_timastamp"
- *
  */
 
 @Entity
@@ -35,17 +31,15 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Transient
-    private String passwordConfirm;
-
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_has_roles", joinColumns = @JoinColumn(name = "users_id"),
-            inverseJoinColumns = @JoinColumn(name = "roles_id"))
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_has_movies", joinColumns = @JoinColumn(name = "users_id"),
-            inverseJoinColumns = @JoinColumn(name = "movies_id"))
-    private Set<Movie> movies;
+    @OneToMany (mappedBy="user", fetch=FetchType.EAGER)
+    private Set<UserMovies> movies;
+
+    @OneToMany (mappedBy="user", fetch=FetchType.EAGER)
+    private Set<UserMovies> statuses;
 
 }

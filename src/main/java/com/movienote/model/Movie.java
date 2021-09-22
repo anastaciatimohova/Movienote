@@ -11,12 +11,6 @@ import java.util.Set;
  * @autor Ilkevich Anastasiya
  * @version 1.0
  *
- *
- * НЕ УЧТЕНО ПОЛЕ backdropPath. ТАК КАК НЕ ЯСНО В КАКОМ ФОРМАТЕ ХРАНИТЬ.
- *
- * НЕ ЗНАЮ КАК В ТАБЛИЦУ users_has_movies СОЗДАТЬ ПОЛЯ "description", "rating",
- * "created_timastamp" и "modefied_timastamp"
- *
  */
 
 @Entity
@@ -32,7 +26,8 @@ public class Movie {
     @Column(name = "adult")
     private boolean adult;
 
-    //private backdropPath;  -> тип?
+    @Column(name = "poster")
+    private byte[] poster;
 
     @Column(name = "original_language")
     private String language;
@@ -43,21 +38,14 @@ public class Movie {
     @Column(name = "overview")
     private String overview;
 
-    @Column(name = "external_ids")
+    @Column(name = "external_id")
     private Long externalId;
 
-    @ManyToMany(mappedBy = "movies")
-    private Set<User> users;
-
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "movies_has_genres", joinColumns = @JoinColumn(name = "movies_id"),
-            inverseJoinColumns = @JoinColumn(name = "genres_id"))
+    @JoinTable(name = "movie_genres", joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Set<Genre> genres;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_has_movies", joinColumns = @JoinColumn(name = "movies_id"),
-            inverseJoinColumns = @JoinColumn(name = "status_id"))
-    private Set<Status> statuses;
-
-
+    @OneToMany (mappedBy="movie", fetch=FetchType.EAGER)
+    private Set<UserMovies> users;
 }

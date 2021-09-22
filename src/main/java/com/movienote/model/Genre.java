@@ -22,8 +22,11 @@ public class Genre {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private  Long id;
 
-    @Column(name = "genres")
-    private String genre;
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "external_id")
+    private Long externalId;
 
     @ManyToMany(mappedBy = "genres")
     private Set<Movie> movies;

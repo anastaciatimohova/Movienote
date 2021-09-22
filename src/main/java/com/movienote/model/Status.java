@@ -7,13 +7,9 @@ import javax.persistence.*;
 import java.util.Set;
 
 /**
- * Объект представляющий статусы просмотра для фильмов
+ * Объект представляющий юзерские статусы фильмов
  * @autor Ilkevich Anastasiya
  * @version 1.0
- *
- * НЕ ЗНАЮ КАК В ТАБЛИЦУ users_has_movies СОЗДАТЬ ПОЛЯ "description", "rating",
- * "created_timastamp" и "modefied_timastamp"
- *
  */
 
 @Entity
@@ -26,12 +22,10 @@ public class Status {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "name")
+    private String name;
 
-    @ManyToMany(mappedBy = "statuses")
-    private Set<Movie> movies;
+    @OneToMany (mappedBy="status", fetch=FetchType.EAGER)
+    private Set<UserMovies> users;
 
 }
-
-
