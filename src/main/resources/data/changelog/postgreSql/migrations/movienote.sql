@@ -54,7 +54,8 @@ CREATE TABLE IF NOT EXISTS movie_genres(
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS user_movies(
-    user_id           BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id                BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    user_id           BIGINT              NOT NULL,
     description        TEXT               NULL,
     rating             INT                NULL,
     status_id          BIGINT             NOT NULL,
