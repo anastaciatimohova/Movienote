@@ -13,7 +13,7 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "status")
+@Table(name = "statuses")
 @Data
 @NoArgsConstructor
 public class Status {
@@ -25,7 +25,7 @@ public class Status {
     @Column(name = "name")
     private String name;
 
-    @OneToMany (mappedBy="status", fetch=FetchType.EAGER)
-    private Set<UserMovies> users;
+    @OneToMany (cascade = CascadeType.ALL, mappedBy="status")
+    private Set<UserMovies> UserMovie;
 
 }

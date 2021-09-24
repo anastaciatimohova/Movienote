@@ -1,7 +1,6 @@
 package com.movienote.model;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -15,7 +14,6 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 @Data
-@NoArgsConstructor
 public class User {
 
     @Id
@@ -36,10 +34,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    @OneToMany (mappedBy="user", fetch=FetchType.EAGER)
-    private Set<UserMovies> movies;
-
-    @OneToMany (mappedBy="user", fetch=FetchType.EAGER)
-    private Set<UserMovies> statuses;
-
+    @OneToMany (cascade = CascadeType.ALL, mappedBy="user")
+    private Set<UserMovies> UserMovie;
 }

@@ -23,37 +23,28 @@ public class UserMovies {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "user_id")
-    private Long userId;
-
-    @Column(name = "status_id")
-    private Long statusId;
-
-    @Column(name = "movie_id")
-    private Long movieId;
-
     @Column(name = "description")
     private String description;
 
-    @Column(name = "rating")
-    private String rating;
+    @Column(name = "reiting")
+    private String reiting;
 
-    @Column(name = "created_timestamp")
+    @Column(name = "created_timstamp")
     private Timestamp createdTimestamp;
 
-    @Column(name = "modefied_timestamp")
+    @Column(name = "updated_timstamp")
     private Timestamp modifiedTimestamp;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @ManyToOne()
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "movie_id")
-    private User movie;
+    @ManyToOne()
+    @JoinColumn(name = "movie_id", referencedColumnName = "id")
+    private Movie movie;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "status_id")
-    private User status;
+    @ManyToOne()
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
+    private Status status;
 
 }

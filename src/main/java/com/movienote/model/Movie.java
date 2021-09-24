@@ -26,13 +26,13 @@ public class Movie {
     @Column(name = "adult")
     private boolean adult;
 
-    @Column(name = "poster")
-    private byte[] poster;
+    @Column(name = "backdrop_path")
+    private String poster;
 
-    @Column(name = "original_language")
+    @Column(name = "language")
     private String language;
 
-    @Column(name = "original_title")
+    @Column(name = "title")
     private String title;
 
     @Column(name = "overview")
@@ -46,6 +46,7 @@ public class Movie {
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Set<Genre> genres;
 
-    @OneToMany (mappedBy="movie", fetch=FetchType.EAGER)
-    private Set<UserMovies> users;
+    @OneToMany (cascade = CascadeType.ALL, mappedBy="movie")
+    private Set<UserMovies> UserMovie;
+
 }
