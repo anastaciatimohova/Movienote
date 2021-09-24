@@ -1,70 +1,104 @@
-DROP SCHEMA IF EXISTS movienote;
+drop schema if exists public;
+create schema if not exists public;
 
-
-
-CREATE SCHEMA IF NOT EXISTS movienote;
-
-CREATE TABLE IF NOT EXISTS users(
-    id       SERIAL PRIMARY KEY NOT NULL,
-    username VARCHAR(255)       NOT NULL UNIQUE,
-    email    VARCHAR(255)       NOT NULL UNIQUE,
-    password VARCHAR(255)       NOT NULL
+CREATE TABLE genres
+(
+    id BIGSERIAL NOT NULL,
+    name varchar(100),
+    external_id varchar(100)
 );
 
-CREATE TABLE IF NOT EXISTS roles(
-    id       SERIAL PRIMARY KEY NOT NULL,
-    name     VARCHAR(225)       NOT NULL
+ALTER TABLE genres ADD CONSTRAINT pk_genres
+    PRIMARY KEY (id);
+
+CREATE TABLE movie_genres
+(
+    movie_id bigint  NOT NULL,
+    genre_id bigint NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS status(
-    id    SERIAL PRIMARY KEY NOT NULL,
-    name VARCHAR(245)       NOT NULL
+CREATE TABLE movies
+(
+    id BIGSERIAL NOT NULL,
+    adult boolean,
+    backdrop_path varchar(255),
+    language varchar(45),
+    title text,
+    overview text,
+    external_id bigint NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS genres(
-    id          SERIAL PRIMARY KEY NOT NULL,
-    name        VARCHAR(245)       NOT NULL UNIQUE,
-    external_id BIGINT             NOT NULL
+ALTER TABLE movies ADD CONSTRAINT pk_movies
+    PRIMARY KEY (id);
+
+CREATE TABLE roles
+(
+    id BIGSERIAL  NOT NULL,
+    name varchar(20) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS movies(
-    id                SERIAL PRIMARY KEY NOT NULL,
-    adult             BOOLEAN            NOT NULL,
-    poster            BYTEA               NOT NULL,
-    original_language VARCHAR(45)        NOT NULL,
-    original_title    VARCHAR(1245)      NOT NULL,
-    overview          VARCHAR(1245)      NOT NULL,
-    external_id       BIGINT             NOT NULL
+ALTER TABLE roles ADD CONSTRAINT pk_role
+    PRIMARY KEY (id);
+
+CREATE TABLE statuses
+(
+    id BIGSERIAL NOT NULL,
+    name varchar(100)
 );
 
-CREATE TABLE IF NOT EXISTS user_movies(
-    id                SERIAL PRIMARY KEY NOT NULL,
-    user_id           BIGINT              NOT NULL,
-    description        TEXT               NULL,
-    rating             INT                NULL,
-    status_id          BIGINT             NOT NULL,
-    movie_id          BIGINT             NOT NULL UNIQUE,
-    created_timestamp  TIMESTAMP          NOT NULL,
-    modefied_timestamp TIMESTAMP          NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (status_id) REFERENCES status (id),
-    FOREIGN KEY (movie_id) REFERENCES movies (id)
-    ON DELETE CASCADE
-    );
+ALTER TABLE statuses ADD CONSTRAINT pk_status
+    PRIMARY KEY (id);
 
-CREATE TABLE IF NOT EXISTS user_roles(
-   user_id BIGINT,
-   role_id BIGINT,
-   FOREIGN KEY (user_id) REFERENCES users (id),
-   FOREIGN KEY (role_id) REFERENCES roles (id)
-        ON DELETE CASCADE
+CREATE TABLE user_movies
+(
+    id BIGSERIAL NOT NULL,
+    user_id bigint NOT NULL,
+    movie_id bigint NOT NULL,
+    status_id bigint NOT NULL,
+    description text,
+    reiting integer,
+    created_timstamp timestamp DEFAULT NOW(),
+    updated_timstamp timestamp DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS movie_genres(
-    movie_id BIGINT NOT NULL,
-    genre_id BIGINT NOT NULL,
-    FOREIGN KEY (movie_id) REFERENCES movies (id),
-    FOREIGN KEY (genre_id) REFERENCES genres (id)
-        ON DELETE CASCADE
+ALTER TABLE user_movies ADD CONSTRAINT pk_user_movies
+    PRIMARY KEY (id);
+
+CREATE TABLE user_roles
+(
+    user_id bigint NOT NULL,
+    role_id bigint NOT NULL
 );
+
+CREATE TABLE users
+(
+    id BIGSERIAL NOT NULL,
+    username varchar(25) NOT NULL UNIQUE,
+    email varchar(40) NOT NULL UNIQUE,
+    password varchar(40) NOT NULL
+);
+
+ALTER TABLE users ADD CONSTRAINT pk_user
+    PRIMARY KEY (id);
+
+ALTER TABLE movie_genres ADD CONSTRAINT fk_movie_genres_genre
+    FOREIGN KEY (genre_id) REFERENCES genres (id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE movie_genres ADD CONSTRAINT fk_movie_genres_movie
+    FOREIGN KEY (movie_id) REFERENCES movies (id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE user_movies ADD CONSTRAINT fk_user_movies_
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE user_movies ADD CONSTRAINT fk_user_movies_movie
+    FOREIGN KEY (movie_id) REFERENCES movies (id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE user_movies ADD CONSTRAINT fk_user_movies_status
+    FOREIGN KEY (status_id) REFERENCES statuses (id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE user_roles ADD CONSTRAINT fk_user_roles_role
+    FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE user_roles ADD CONSTRAINT fk_user_roles_user
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
