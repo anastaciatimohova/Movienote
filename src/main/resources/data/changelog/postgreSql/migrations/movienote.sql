@@ -56,9 +56,9 @@ CREATE TABLE user_movies
     movie_id bigint NOT NULL,
     status_id bigint NOT NULL,
     description text,
-    reiting integer,
-    created_timstamp timestamp DEFAULT NOW(),
-    updated_timstamp timestamp DEFAULT NOW()
+    rating integer,
+    created_timestamp timestamp DEFAULT NOW(),
+    updated_timestamp timestamp DEFAULT NOW()
 );
 
 ALTER TABLE user_movies ADD CONSTRAINT pk_user_movies
@@ -87,7 +87,7 @@ ALTER TABLE movie_genres ADD CONSTRAINT fk_movie_genres_genre
 ALTER TABLE movie_genres ADD CONSTRAINT fk_movie_genres_movie
     FOREIGN KEY (movie_id) REFERENCES movies (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE user_movies ADD CONSTRAINT fk_user_movies_
+ALTER TABLE user_movies ADD CONSTRAINT fk_user_movies_user
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE user_movies ADD CONSTRAINT fk_user_movies_movie
