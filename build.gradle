@@ -2,9 +2,6 @@ plugins {
     id 'org.springframework.boot' version '2.5.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
-
-    id "org.akhikhl.gretty" version "1.2.4"
-    id 'org.liquibase.gradle' version '1.1.1'
 }
 
 group = 'com'
@@ -16,51 +13,16 @@ configurations {
         extendsFrom annotationProcessor
     }
 }
-apply plugin: 'java'
-apply plugin: 'war'
-apply from: 'database.gradle'
 
 repositories {
     mavenCentral()
-}
-
-plugins {
-    id 'org.liquibase.gradle' version '1.1.1'
-}
-
-def dbUser = project.properties['dbUser'] ?: gradle.dbUser
-def dbPassword = project.properties['dbPassword'] ?: gradle.dbPassword
-def dbUrl = project.properties['dbUrl'] ?: gradle.dbUrl
-
-liquibase {
-    activities {
-        //noinspection GroovyAssignabilityCheck
-        main {
-            changeLogFile 'resources/data/changelog/changes/db.changelog-master.xml'
-            url dbUrl
-            username dbUser
-            password dbPassword
-        }
-    }
-}
-task updateDbMain(dependsOn: startDatabase) {
-    group = 'develop'
-    doLast {
-        liquibase.runList = 'main'
-        tasks.update.execute()
-    }
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-
-    compile('org.springframework.boot:spring-boot-starter')
-    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-    implementation("org.liquibase:liquibase-core")
-
-    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
