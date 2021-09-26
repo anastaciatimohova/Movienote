@@ -26,13 +26,13 @@ public class UserMovies {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "reiting")
-    private String reiting;
+    @Column(name = "rating")
+    private String rating;
 
-    @Column(name = "created_timstamp")
+    @Column(name = "created_timestamp")
     private Timestamp createdTimestamp;
 
-    @Column(name = "updated_timstamp")
+    @Column(name = "updated_timestamp")
     private Timestamp modifiedTimestamp;
 
     @ManyToOne()

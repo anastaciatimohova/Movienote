@@ -46,7 +46,7 @@ public class Movie {
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Set<Genre> genres;
 
-    @OneToMany (cascade = CascadeType.ALL, mappedBy="movie")
+    @OneToMany (mappedBy="movie", cascade = CascadeType.DETACH)
     private Set<UserMovies> UserMovie;
 
 }

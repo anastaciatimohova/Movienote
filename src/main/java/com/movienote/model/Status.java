@@ -25,7 +25,7 @@ public class Status {
     @Column(name = "name")
     private String name;
 
-    @OneToMany (cascade = CascadeType.ALL, mappedBy="status")
+    @OneToMany (mappedBy="status", cascade = CascadeType.DETACH)
     private Set<UserMovies> UserMovie;
 
 }
