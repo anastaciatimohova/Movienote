@@ -5,7 +5,7 @@ CREATE TABLE genres
 (
     id BIGSERIAL NOT NULL,
     name varchar(100),
-    external_id varchar(100)
+    external_id bigint NOT NULL
 );
 
 ALTER TABLE genres ADD CONSTRAINT pk_genres
