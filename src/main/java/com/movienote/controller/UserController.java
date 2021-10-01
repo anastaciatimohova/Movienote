@@ -6,12 +6,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Контроллер для сущности User
+ *
+ * @autor Ilkevich Anastasiya
+ * @version 1.0
+ */
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
-    @GetMapping("/all")
+    @GetMapping()
     public List<User> getAllUsers() {
 
         List<User> users = new ArrayList<>();
@@ -19,8 +25,8 @@ public class UserController {
         return users;
     }
 
-    @GetMapping("/username")
-    public User getUserByName(@RequestParam(value = "username", required = false) String username) {
+    @GetMapping()
+    public User getUserByName(@RequestParam(value = "username") String username) {
 
         User user = new User();
 
@@ -28,25 +34,23 @@ public class UserController {
 
     }
 
-    @PostMapping("/save")
-    public void saveUser(@RequestParam(value = "username", required = false) String username,
-                         @RequestParam(value = "password", required = false) String password,
-                         @RequestParam(value = "email", required = false) String email, User user) {
+    @PostMapping()
+    public User saveUser(@RequestBody User user) {
+
+        return user;
 
     }
 
-    @PutMapping("/update")
-    public User updateUsernameById(@RequestParam(value = "id", required = false) Long id,
-                                   @RequestParam(value = "username", required = false) String username) {
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable("id")Long id) {
 
         User user = new User();
 
         return user;
     }
 
-    @DeleteMapping("/delete")
-    public List<User> deleteById(@RequestParam(value = "id", required = false) Long id) {
+    @DeleteMapping("/{username}")
+    public void deleteUser(@PathVariable("username") String username) {
 
-        return getAllUsers();
     }
 }
