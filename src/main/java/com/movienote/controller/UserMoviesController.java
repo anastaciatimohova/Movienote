@@ -17,8 +17,8 @@ import java.util.List;
 @RequestMapping("/notes")
 public class UserMoviesController {
 
-    @GetMapping
-    public List<UserMovies> getAllUserMovies (){
+    @GetMapping("/{user_id}")
+    public List<UserMovies> getAllUserMoviesByUsername (@PathVariable ("user_id") Long id){
 
         List<UserMovies> userMoviesList = new ArrayList<>();
 
@@ -40,10 +40,8 @@ public class UserMoviesController {
 
     }
 
-    @PutMapping("/{id}")
-    public UserMovies updateUserMovies(@PathVariable ("id") Long id ){
-
-        UserMovies userMovies = new UserMovies();
+    @PutMapping()
+    public UserMovies updateUserMovies(@RequestBody UserMovies userMovies){
 
         return userMovies;
     }

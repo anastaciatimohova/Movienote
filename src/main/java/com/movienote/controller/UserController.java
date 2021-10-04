@@ -25,8 +25,8 @@ public class UserController {
         return users;
     }
 
-    @GetMapping()
-    public User getUserByName(@RequestParam(value = "username") String username) {
+    @GetMapping("/{username}")
+    public User getUserByName(@PathVariable("username") String username) {
 
         User user = new User();
 
@@ -41,10 +41,8 @@ public class UserController {
 
     }
 
-    @PutMapping("/{id}")
-    public User updateUser(@PathVariable("id")Long id) {
-
-        User user = new User();
+    @PutMapping()
+    public User updateUser(@RequestBody User user) {
 
         return user;
     }

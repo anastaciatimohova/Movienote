@@ -38,8 +38,8 @@ public class StatusController {
 
     }
 
-    @PutMapping("/{name}")
-    public Status updateStatus(@PathVariable("name") String nsme) {
+    @PutMapping("/{id}/{name}")
+    public Status updateStatus(@PathVariable("id") Long id, @PathVariable("name") String name) {
 
         Status status = new Status();
 

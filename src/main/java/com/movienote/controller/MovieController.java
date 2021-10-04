@@ -25,8 +25,8 @@ public class MovieController {
         return movies;
     }
 
-    @GetMapping("/{titleMovie}")
-    public Movie getMovie(@PathVariable("titleMovie") String title) {
+    @GetMapping("/{title_Movie}")
+    public Movie getMovie(@PathVariable("title_Movie") String title) {
 
         Movie movie = new Movie();
 
@@ -34,18 +34,15 @@ public class MovieController {
     }
 
     @PostMapping
-    public Movie saveMovie(@RequestBody Movie movie) {
-
-        return movie;
+    public void saveMovie(@RequestBody Movie movie) {
 
     }
 
-    @PatchMapping("/{externalId}")
-    public Movie updateMovie(@PathVariable("externalId") Long externalId) {
-
-        Movie movie = new Movie();
+    @PutMapping()
+    public Movie updateMovie(@RequestBody Movie movie) {
 
         return movie;
+
     }
 
     @DeleteMapping("/{id}")

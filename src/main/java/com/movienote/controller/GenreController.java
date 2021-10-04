@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/Genre")
+@RequestMapping("/genre")
 public class GenreController {
 
     @GetMapping()
@@ -33,25 +33,24 @@ public class GenreController {
         return genre;
     }
 
-    @PostMapping("/{externalId}")
-    public void saveGenre(@PathVariable("externalId") String externalId) {
+    @PostMapping()
+    public void saveGenre(@RequestBody Genre genre ){
 
     }
 
-    @PatchMapping("/{name}")
-    public Genre updateGenre(@PathVariable("name") String name) {
+    @PutMapping("/{id}/{name}")
+    public Genre updateGenre(@PathVariable("id") Long id, @PathVariable("name") String name ) {
 
         Genre genre = new Genre();
 
         return genre;
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{name}")
 
-    public void deleteGenre(@PathVariable("id") Long id) {
+    public void deleteGenre(@PathVariable("name") String name) {
 
     }
-
 }
 
 
