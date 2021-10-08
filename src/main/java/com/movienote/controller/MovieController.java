@@ -1,9 +1,10 @@
 package com.movienote.controller;
 
 import com.movienote.model.Movie;
+import com.movienote.service.MovieServiceImplementation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,37 +18,41 @@ import java.util.List;
 @RequestMapping("/movie")
 public class MovieController {
 
+    @Autowired
+    private MovieServiceImplementation movieService;
+
     @GetMapping()
     public List<Movie> getAllMovies() {
 
-        List<Movie> movies = new ArrayList<>();
+        return movieService.getAll();
 
-        return movies;
     }
 
-    @GetMapping("/{title_Movie}")
-    public Movie getMovie(@PathVariable("title_Movie") String title) {
+    @GetMapping("/{title}")
+    public Movie getMovie(@PathVariable("title") String title) {
 
-        Movie movie = new Movie();
+        return movieService.getByTitle(title);
 
-        return movie;
     }
 
     @PostMapping
     public void saveMovie(@RequestBody Movie movie) {
+
+        movieService.save(movie);
 
     }
 
     @PutMapping()
     public Movie updateMovie(@RequestBody Movie movie) {
 
-        return movie;
+        return movieService.change(movie);
 
     }
 
     @DeleteMapping("/{id}")
-
     public void deleteMovie(@PathVariable("id") Long id) {
+
+        movieService.delete(id);
 
     }
 }

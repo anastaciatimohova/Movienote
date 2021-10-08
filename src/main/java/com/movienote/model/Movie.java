@@ -1,7 +1,12 @@
 package com.movienote.model;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -15,8 +20,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "movies")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Movie {
 
     @Id
@@ -26,12 +33,15 @@ public class Movie {
     @Column(name = "adult")
     private boolean adult;
 
+    @JsonProperty("backdrop_path")
     @Column(name = "backdrop_path")
     private String poster;
 
+    @JsonProperty("original_language")
     @Column(name = "language")
     private String language;
 
+    @JsonProperty("original_title")
     @Column(name = "title")
     private String title;
 
@@ -47,6 +57,16 @@ public class Movie {
     private Set<Genre> genres;
 
     @OneToMany (mappedBy="movie", cascade = CascadeType.DETACH)
-    private Set<UserMovies> UserMovie;
+    private Set<UserMovies> userMovie;
+
+    @JsonProperty("id")
+    public Long getExternalId() {
+        return externalId;
+    }
+
+    @JsonProperty("id")
+    public void setExternalId(Long externalId) {
+        this.externalId = externalId;
+    }
 
 }
