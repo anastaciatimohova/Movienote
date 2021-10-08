@@ -1,8 +1,7 @@
 package com.movienote.controller;
 
 import com.movienote.model.User;
-import com.movienote.service.UserServiceImplementation;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.movienote.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +17,11 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    UserServiceImplementation userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping()
     public List<User> getAllUsers() {
@@ -49,10 +51,10 @@ public class UserController {
 
     }
 
-    @DeleteMapping("/{username}")
-    public void deleteUser(@PathVariable("username") String username) {
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable("id") Long id) {
 
-        userService.delete(username);
+        userService.delete(id);
 
     }
 }

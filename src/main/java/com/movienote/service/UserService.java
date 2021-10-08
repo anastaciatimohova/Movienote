@@ -23,6 +23,6 @@ public interface UserService {
 
     User change(User user);
 
-    void delete (String username);
+    void delete (Long id);
 
 }

@@ -6,7 +6,6 @@ import com.movienote.model.Role;
 import com.movienote.model.User;
 import com.movienote.repository.RoleJpaRepository;
 import com.movienote.repository.UserJpaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,11 +24,14 @@ import java.util.Set;
 @Service
 public class UserServiceImplementation implements UserService {
 
-    @Autowired
-    private UserJpaRepository userJpaRepository;
+    private final UserJpaRepository userJpaRepository;
 
-    @Autowired
-    private RoleJpaRepository roleJpaRepository;
+    private final RoleJpaRepository roleJpaRepository;
+
+    public UserServiceImplementation(UserJpaRepository userJpaRepository, RoleJpaRepository roleJpaRepository) {
+        this.userJpaRepository = userJpaRepository;
+        this.roleJpaRepository = roleJpaRepository;
+    }
 
 
     @Override
@@ -50,7 +52,7 @@ public class UserServiceImplementation implements UserService {
     public void save(User user) {
 
         Set<Role> roles = new HashSet<>();
-        roles.add(roleJpaRepository.getById(1L));
+        roles.add(roleJpaRepository.getByName("ROLE_USER"));
         user.setRoles(roles);
 
         userJpaRepository.save(user);
@@ -64,9 +66,9 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public void delete(String username) {
+    public void delete(Long id) {
 
-        userJpaRepository.deleteByUsername(username);
+        userJpaRepository.deleteById(id);
 
     }
 }
