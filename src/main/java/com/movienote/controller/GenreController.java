@@ -1,9 +1,9 @@
 package com.movienote.controller;
 
 import com.movienote.model.Genre;
+import com.movienote.service.GenreService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,38 +17,40 @@ import java.util.List;
 @RequestMapping("/genre")
 public class GenreController {
 
+    private final GenreService genreService;
+
+    public GenreController(GenreService genreService) {
+        this.genreService = genreService;
+    }
+
     @GetMapping()
     public List<Genre> getAllGenres() {
 
-        List<Genre> genres = new ArrayList<>();
-
-        return genres;
+        return genreService.getAll();
     }
 
     @GetMapping("/{name}")
     public Genre getGenre(@PathVariable("name") String name) {
 
-        Genre genre = new Genre();
-
-        return genre;
+        return genreService.getByName(name);
     }
 
-    @PostMapping()
+  @PostMapping()
     public void saveGenre(@RequestBody Genre genre ){
 
+        genreService.save(genre);
     }
 
-    @PutMapping("/{id}/{name}")
-    public Genre updateGenre(@PathVariable("id") Long id, @PathVariable("name") String name ) {
+    @PutMapping()
+    public Genre updateGenre(@RequestBody Genre genre ) {
 
-        Genre genre = new Genre();
-
-        return genre;
+        return genreService.change(genre);
     }
 
-    @DeleteMapping("/{name}")
+    @DeleteMapping("/{id}")
+    public void deleteGenre(@PathVariable("id") Long id) {
 
-    public void deleteGenre(@PathVariable("name") String name) {
+        genreService.delete(id);
 
     }
 }
