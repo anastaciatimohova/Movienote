@@ -23,7 +23,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Movie {
 
     @Id
@@ -33,15 +32,12 @@ public class Movie {
     @Column(name = "adult")
     private boolean adult;
 
-    @JsonProperty("backdrop_path")
     @Column(name = "backdrop_path")
     private String poster;
 
-    @JsonProperty("original_language")
     @Column(name = "language")
     private String language;
 
-    @JsonProperty("original_title")
     @Column(name = "title")
     private String title;
 
@@ -58,15 +54,5 @@ public class Movie {
 
     @OneToMany (mappedBy="movie", cascade = CascadeType.DETACH)
     private Set<UserMovies> userMovie;
-
-    @JsonProperty("id")
-    public Long getExternalId() {
-        return externalId;
-    }
-
-    @JsonProperty("id")
-    public void setExternalId(Long externalId) {
-        this.externalId = externalId;
-    }
 
 }

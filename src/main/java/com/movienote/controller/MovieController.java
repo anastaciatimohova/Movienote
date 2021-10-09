@@ -1,7 +1,7 @@
 package com.movienote.controller;
 
 import com.movienote.model.Movie;
-import com.movienote.service.MovieServiceImplementation;
+import com.movienote.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +19,7 @@ import java.util.List;
 public class MovieController {
 
     @Autowired
-    private MovieServiceImplementation movieService;
+    private MovieService movieService;
 
     @GetMapping()
     public List<Movie> getAllMovies() {
@@ -28,8 +28,8 @@ public class MovieController {
 
     }
 
-    @GetMapping("/{title}")
-    public Movie getMovie(@PathVariable("title") String title) {
+    @GetMapping("/search")
+    public Movie getMovie(@RequestParam("title") String title) {
 
         return movieService.getByTitle(title);
 
