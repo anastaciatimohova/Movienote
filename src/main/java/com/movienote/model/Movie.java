@@ -1,7 +1,12 @@
 package com.movienote.model;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -15,7 +20,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "movies")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Movie {
 
@@ -47,6 +53,6 @@ public class Movie {
     private Set<Genre> genres;
 
     @OneToMany (mappedBy="movie", cascade = CascadeType.DETACH)
-    private Set<UserMovies> UserMovie;
+    private Set<UserMovies> userMovie;
 
 }

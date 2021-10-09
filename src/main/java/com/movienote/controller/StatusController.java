@@ -1,9 +1,9 @@
 package com.movienote.controller;
 
 import com.movienote.model.Status;
+import com.movienote.service.StatusService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,38 +17,42 @@ import java.util.List;
 @RequestMapping("/status")
 public class StatusController {
 
+    private final StatusService statusService;
+
+    public StatusController(StatusService statusService) {
+        this.statusService = statusService;
+    }
+
     @GetMapping()
     public List<Status> getAllStatuses() {
 
-        List<Status> statuses = new ArrayList<>();
-
-        return statuses;
+        return statusService.getAll();
     }
 
     @GetMapping("/{name}")
     public Status getStatus(@PathVariable("name") String name) {
 
-        Status status = new Status();
-
-        return status;
+        return statusService.getByName(name);
     }
 
     @PostMapping("/{name}")
     public void saveStatus(@PathVariable("name") String name) {
 
+        statusService.save(name);
+
     }
 
-    @PutMapping("/{id}/{name}")
-    public Status updateStatus(@PathVariable("id") Long id, @PathVariable("name") String name) {
+    @PutMapping()
+    public Status updateStatus(@RequestBody Status status) {
 
-        Status status = new Status();
+        return statusService.change(status);
 
-        return status;
     }
 
     @DeleteMapping("/{id}")
-
     public void deleteStatus(@PathVariable("id") Long id) {
+
+        statusService.delete(id);
 
     }
 

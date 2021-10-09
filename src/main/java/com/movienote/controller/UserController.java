@@ -1,54 +1,60 @@
 package com.movienote.controller;
 
 import com.movienote.model.User;
+import com.movienote.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Контроллер для сущности User
  *
- * @autor Ilkevich Anastasiya
  * @version 1.0
+ * @autor Ilkevich Anastasiya
  */
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping()
     public List<User> getAllUsers() {
 
-        List<User> users = new ArrayList<>();
+        return userService.getAll();
 
-        return users;
     }
 
     @GetMapping("/{username}")
     public User getUserByName(@PathVariable("username") String username) {
 
-        User user = new User();
-
-        return user;
+        return userService.getByName(username);
 
     }
 
     @PostMapping()
-    public User saveUser(@RequestBody User user) {
+    public void saveUser(@RequestBody User user) {
 
-        return user;
+        userService.save(user);
 
     }
 
     @PutMapping()
     public User updateUser(@RequestBody User user) {
 
-        return user;
+        return userService.change(user);
+
     }
 
-    @DeleteMapping("/{username}")
-    public void deleteUser(@PathVariable("username") String username) {
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable("id") Long id) {
+
+        userService.delete(id);
 
     }
 }
