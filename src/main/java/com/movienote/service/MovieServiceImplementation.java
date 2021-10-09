@@ -3,7 +3,6 @@ package com.movienote.service;
 
 import com.movienote.model.Movie;
 import com.movienote.repository.MovieJpaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,8 +20,12 @@ import java.util.List;
 @Service
 public class MovieServiceImplementation implements MovieService {
 
-    @Autowired
-    private MovieJpaRepository movieJpaRepository;
+
+    private final MovieJpaRepository movieJpaRepository;
+
+    public MovieServiceImplementation(MovieJpaRepository movieJpaRepository) {
+        this.movieJpaRepository = movieJpaRepository;
+    }
 
     @Override
     public List<Movie> getAll() {
