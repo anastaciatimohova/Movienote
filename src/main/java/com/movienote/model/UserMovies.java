@@ -27,7 +27,7 @@ public class UserMovies {
     private String description;
 
     @Column(name = "rating")
-    private String rating;
+    private int rating;
 
     @Column(name = "created_timestamp")
     private Timestamp createdTimestamp;
