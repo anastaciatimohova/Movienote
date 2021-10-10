@@ -23,12 +23,12 @@ public class GenreJpaRepositoryTests {
     private TestEntityManager entityManager;
 
     @BeforeAll
-    public void beforeAllSetUp() {
+    public static void beforeAllSetUp() {
         System.out.println("beforeAllSetUp(): method called");
     }
 
     @AfterAll
-    public void afterAllTearDown() {
+    public static void afterAllTearDown() {
         System.out.println("afterAllTearDown(): method called");
     }
 
