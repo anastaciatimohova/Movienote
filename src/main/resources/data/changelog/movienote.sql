@@ -1,6 +1,3 @@
-drop schema if exists public;
-create schema if not exists public;
-
 CREATE TABLE genres
 (
     id BIGSERIAL NOT NULL,
@@ -101,4 +98,3 @@ ALTER TABLE user_roles ADD CONSTRAINT fk_user_roles_role
 
 ALTER TABLE user_roles ADD CONSTRAINT fk_user_roles_user
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE;
-
