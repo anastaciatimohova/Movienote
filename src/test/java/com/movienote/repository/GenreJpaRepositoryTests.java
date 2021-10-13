@@ -1,17 +1,15 @@
 package com.movienote.repository;
 
 import com.movienote.model.Genre;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.TestPropertySource;
 
+import java.util.ArrayList;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
 @TestPropertySource(locations = "classpath:application-test.properties")
@@ -38,10 +36,37 @@ public class GenreJpaRepositoryTests {
         genreJpaRepository.deleteAll();
     }
 
+
     @Test
-    public void testGetGenreByName(String name) {
+    public void testGetGenreByName() {
+
+        final String genreName = "testGenre";
         Genre genre = new Genre();
-        genreJpaRepository.findByName(name);
-        assertNotNull(genre);
+        genre.setName(genreName);
+        genreJpaRepository.save(genre);
+
+        List<Genre> found = (List<Genre>) genreJpaRepository.findByName(genreName);
+        org.junit.jupiter.api.Assertions.assertEquals(1, found.size());
+        org.junit.jupiter.api.Assertions.assertEquals(genre, found.get(0));
+
+    }
+
+    private void testSaveGenre(int number) {
+
+        List<Genre> genres = new ArrayList<>();
+
+        for (int i = 0; i < number; i++) {
+            Genre genre = new Genre();
+            genre.setName("NameGenre" + i);
+            genres.add(genre);
+        }
+        genreJpaRepository.saveAll(genres);
+    }
+
+    private void testSaveAllGenres() {
+        testSaveGenre(5);
+        List<Genre> found = genreJpaRepository.findAll();
+        Assertions.assertEquals(5, found.size());
+
     }
 }

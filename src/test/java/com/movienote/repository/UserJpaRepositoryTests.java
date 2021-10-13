@@ -1,17 +1,17 @@
 package com.movienote.repository;
 
-import com.movienote.model.Genre;
 import com.movienote.model.User;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import net.bytebuddy.utility.RandomString;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.TestPropertySource;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 @DataJpaTest
 @TestPropertySource(locations = "classpath:application-test.properties")
@@ -39,9 +39,35 @@ public class UserJpaRepositoryTests {
     }
 
     @Test
-    public void testGetUserByUserName(String username) {
+    public void testGetUserByUserName() {
+
+        final String username = "testUserName";
         User user = new User();
-        userJpaRepository.findByUsername(username);
-        assertNotNull(user);
+        user.setUsername(username);
+        user.setEmail((RandomString.make(10)));
+        userJpaRepository.save(user);
+
+        List<User> found = (List<User>) userJpaRepository.findByUsername(username);
+        Assertions.assertEquals(1, found.size());
+        Assertions.assertEquals(user, found.get(0));
+
+    }
+
+    private void testSaveUsers(int number) {
+        List<User> users = new ArrayList<>();
+        for (int i = 0; i < number; i++) {
+            User user = new User();
+            user.setUsername("Name" + i);
+            user.setEmail((RandomString.make(10)));
+            users.add(user);
+        }
+        userJpaRepository.saveAll(users);
+    }
+
+    private void testSaveAllUsers() {
+        testSaveUsers(5);
+        List<User> found = userJpaRepository.findAll();
+        Assertions.assertEquals(5, found.size());
+
     }
 }

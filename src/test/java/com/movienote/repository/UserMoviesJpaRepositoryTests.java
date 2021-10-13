@@ -1,7 +1,7 @@
 package com.movienote.repository;
 
-import com.movienote.model.Genre;
 import com.movienote.model.UserMovies;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +13,6 @@ import org.springframework.test.context.TestPropertySource;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
 @TestPropertySource(locations = "classpath:application-test.properties")
@@ -41,8 +40,10 @@ public class UserMoviesJpaRepositoryTests {
     }
 
     @Test
-    public void testGetUserMoviesByUserId(Long id) {
+    public void testGetALLUserMoviesByUserId(Long id) {
         List<UserMovies> userMovies = userMoviesJpaRepository.findAllByUserId(id);
-        assertNotNull(userMovies);
+        Assertions.assertThat(userMovies.size()).isGreaterThan(0);
     }
+
+
 }

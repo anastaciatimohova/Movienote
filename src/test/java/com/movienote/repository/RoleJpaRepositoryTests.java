@@ -2,14 +2,16 @@ package com.movienote.repository;
 
 import com.movienote.model.Genre;
 import com.movienote.model.Role;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.movienote.model.User;
+import net.bytebuddy.utility.RandomString;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.TestPropertySource;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -39,9 +41,36 @@ public class RoleJpaRepositoryTests {
     }
 
     @Test
-    public void testGetRoleByName(String role) {
-        Role roles = new Role();
-        roleJpaRepository.getByName(role);
-        assertNotNull(roles);
+    public void testGetRoleByName() {
+
+        final String roleName = "testRoleName";
+        Role role = new Role();
+        role.setName(roleName);
+
+        roleJpaRepository.save(role);
+
+        List<Role> found = (List<Role>) roleJpaRepository.getByName(roleName);
+        Assertions.assertEquals(1, found.size());
+        Assertions.assertEquals(role, found.get(0));
+
     }
+
+    private void testSaveRole(int number) {
+        List<Role> users = new ArrayList<>();
+        for (int i = 0; i < number; i++) {
+            Role role = new Role();
+            role.setName("NameRole" + i);
+
+            users.add(role);
+        }
+        roleJpaRepository.saveAll(users);
+    }
+
+    private void testSaveAllRoles() {
+        testSaveRole(5);
+        List<Role> found = roleJpaRepository.findAll();
+        Assertions.assertEquals(5, found.size());
+
+    }
+
 }
