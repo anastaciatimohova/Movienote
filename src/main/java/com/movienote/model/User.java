@@ -42,4 +42,16 @@ public class User {
     @JsonIgnore
     @OneToMany (cascade = CascadeType.ALL, mappedBy="user")
     private Set<UserMovies> UserMovie;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles.toString() +
+                ", UserMovie=" + UserMovie +
+                '}';
+    }
 }

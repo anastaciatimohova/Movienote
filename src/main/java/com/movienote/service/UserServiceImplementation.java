@@ -6,6 +6,8 @@ import com.movienote.model.Role;
 import com.movienote.model.User;
 import com.movienote.repository.RoleJpaRepository;
 import com.movienote.repository.UserJpaRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,8 @@ import java.util.Set;
 @Transactional
 @Service
 public class UserServiceImplementation implements UserService {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImplementation.class);
 
     private final UserJpaRepository userJpaRepository;
 
@@ -56,12 +60,19 @@ public class UserServiceImplementation implements UserService {
         user.setRoles(roles);
 
         userJpaRepository.save(user);
+
+        logger.info("save new user" + user.toString());
+
     }
 
     @Override
     public User change(User user) {
 
-        return userJpaRepository.save(user);
+        userJpaRepository.save(user);
+
+        logger.info("change user"+ user.toString());
+
+        return user;
 
     }
 
@@ -69,6 +80,8 @@ public class UserServiceImplementation implements UserService {
     public void delete(Long id) {
 
         userJpaRepository.deleteById(id);
+
+        logger.info("delete user by ID" + id);
 
     }
 }
