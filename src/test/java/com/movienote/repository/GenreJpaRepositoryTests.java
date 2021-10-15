@@ -1,10 +1,11 @@
 package com.movienote.repository;
 
 import com.movienote.model.Genre;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.TestPropertySource;
 
 import java.util.ArrayList;
@@ -17,22 +18,11 @@ public class GenreJpaRepositoryTests {
 
     @Autowired
     private GenreJpaRepository genreJpaRepository;
-    @Autowired
-    private TestEntityManager entityManager;
 
-    @BeforeAll
-    public static void beforeAllSetUp() {
-        System.out.println("beforeAllSetUp(): method called");
-    }
-
-    @AfterAll
-    public static void afterAllTearDown() {
-        System.out.println("afterAllTearDown(): method called");
-    }
 
     @BeforeEach
     public void beforeEachSetUp() {
-        System.out.println("beforeEachSetUp(): method called");
+
         genreJpaRepository.deleteAll();
     }
 
@@ -46,8 +36,8 @@ public class GenreJpaRepositoryTests {
         genreJpaRepository.save(genre);
 
         List<Genre> found = (List<Genre>) genreJpaRepository.findByName(genreName);
-        org.junit.jupiter.api.Assertions.assertEquals(1, found.size());
-        org.junit.jupiter.api.Assertions.assertEquals(genre, found.get(0));
+        Assertions.assertEquals(1, found.size());
+        Assertions.assertEquals(genre, found.get(0));
 
     }
 
