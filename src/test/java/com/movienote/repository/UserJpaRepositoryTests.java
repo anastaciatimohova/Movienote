@@ -41,22 +41,4 @@ public class UserJpaRepositoryTests {
         Assertions.assertEquals(user, found.get(0));
 
     }
-
-    private void testSaveUsers(int number) {
-        List<User> users = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
-            User user = new User();
-            user.setUsername("Name" + i);
-            user.setEmail((RandomString.make(10)));
-            users.add(user);
-        }
-        userJpaRepository.saveAll(users);
-    }
-
-    private void testSaveAllUsers() {
-        testSaveUsers(5);
-        List<User> found = userJpaRepository.findAll();
-        Assertions.assertEquals(5, found.size());
-
-    }
 }

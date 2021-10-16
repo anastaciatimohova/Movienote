@@ -40,23 +40,4 @@ public class GenreJpaRepositoryTests {
         Assertions.assertEquals(genre, found.get(0));
 
     }
-
-    private void testSaveGenre(int number) {
-
-        List<Genre> genres = new ArrayList<>();
-
-        for (int i = 0; i < number; i++) {
-            Genre genre = new Genre();
-            genre.setName("NameGenre" + i);
-            genres.add(genre);
-        }
-        genreJpaRepository.saveAll(genres);
-    }
-
-    private void testSaveAllGenres() {
-        testSaveGenre(5);
-        List<Genre> found = genreJpaRepository.findAll();
-        Assertions.assertEquals(5, found.size());
-
-    }
 }

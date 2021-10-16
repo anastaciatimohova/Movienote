@@ -41,23 +41,4 @@ public class MovieJpaRepositoryTests {
 
     }
 
-    private void testSaveMovie(int number) {
-
-        List<Movie> movies = new ArrayList<>();
-
-        for (int i = 0; i < number; i++) {
-            Movie movie = new Movie();
-            movie.setTitle("NameMovie" + i);
-
-            movies.add(movie);
-        }
-        movieJpaRepository.saveAll(movies);
-    }
-
-    private void testSaveAllMovies() {
-        testSaveMovie(5);
-        List<Movie> found = movieJpaRepository.findAll();
-        Assertions.assertEquals(5, found.size());
-
-    }
 }

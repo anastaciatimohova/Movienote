@@ -39,22 +39,4 @@ public class StatusJpaRepositoryTests {
         Assertions.assertEquals(status, found.get(0));
 
     }
-
-    private void testSaveStatus(int number) {
-        List<Status> statuses = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
-            Status status = new Status();
-            status.setName("NameStatus" + i);
-
-            statuses.add(status);
-        }
-        statusJpaRepository.saveAll(statuses);
-    }
-
-    private void testSaveAllStatuses() {
-        testSaveStatus(5);
-        List<Status> found = statusJpaRepository.findAll();
-        Assertions.assertEquals(5, found.size());
-
-    }
 }

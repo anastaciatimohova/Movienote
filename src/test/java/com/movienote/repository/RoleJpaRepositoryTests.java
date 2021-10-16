@@ -39,23 +39,4 @@ public class RoleJpaRepositoryTests {
         Assertions.assertEquals(role, found.get(0));
 
     }
-
-    private void testSaveRole(int number) {
-        List<Role> users = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
-            Role role = new Role();
-            role.setName("NameRole" + i);
-
-            users.add(role);
-        }
-        roleJpaRepository.saveAll(users);
-    }
-
-    private void testSaveAllRoles() {
-        testSaveRole(5);
-        List<Role> found = roleJpaRepository.findAll();
-        Assertions.assertEquals(5, found.size());
-
-    }
-
 }
