@@ -23,7 +23,8 @@ dependencies {
             'org.springframework.boot:spring-boot-starter-data-jpa',
             'org.springframework.boot:spring-boot-starter-web',
             'org.projectlombok:lombok',
-            'org.liquibase:liquibase-core'
+            'org.liquibase:liquibase-core',
+            'org.springdoc:springdoc-openapi-ui:1.4.6'
             //'org.springframework.boot:spring-boot-starter-security'
     )
     runtimeOnly(
