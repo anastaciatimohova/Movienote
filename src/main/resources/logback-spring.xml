@@ -16,7 +16,7 @@
             <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
                 <fileNamePattern>logs/archived/movienote_log.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
 
-                            <maxFileSize>200MB</maxFileSize>
+                            <maxFileSize>2MB</maxFileSize>
 
                             <totalSizeCap>20GB</totalSizeCap>
 

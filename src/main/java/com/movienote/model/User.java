@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -19,6 +20,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class User {
 
     @Id
@@ -41,17 +43,7 @@ public class User {
 
     @JsonIgnore
     @OneToMany (cascade = CascadeType.ALL, mappedBy="user")
+    @ToString.Exclude
     private Set<UserMovies> UserMovie;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", roles=" + roles.toString() +
-                ", UserMovie=" + UserMovie +
-                '}';
-    }
 }

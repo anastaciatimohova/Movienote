@@ -1,10 +1,7 @@
 package com.movienote.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -20,6 +17,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class Role {
 
     @Id
@@ -31,14 +29,8 @@ public class Role {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "roles")
+    @ToString.Exclude
     private Set<User> users;
 
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }
 
