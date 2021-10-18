@@ -6,6 +6,7 @@ import com.movienote.model.Role;
 import com.movienote.model.User;
 import com.movienote.repository.RoleJpaRepository;
 import com.movienote.repository.UserJpaRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,7 @@ import java.util.Set;
  * @autor Ilkevich Anastasiya
  */
 
+@Slf4j
 @Transactional
 @Service
 public class UserServiceImplementation implements UserService {
@@ -56,19 +58,36 @@ public class UserServiceImplementation implements UserService {
         user.setRoles(roles);
 
         userJpaRepository.save(user);
+
+        log.info("save new user " + user);
+
     }
 
     @Override
-    public User change(User user) {
+    public User update(User user) {
 
-        return userJpaRepository.save(user);
+        boolean userDBId = userJpaRepository.existsById(user.getId());
 
+        if (userDBId) {
+
+            userJpaRepository.save(user);
+
+            log.info("update user " + user);
+
+        }else {
+
+            log.warn("user with such id does not exist " + user);
+
+        }
+        return user;
     }
 
     @Override
     public void delete(Long id) {
 
         userJpaRepository.deleteById(id);
+
+        log.info("delete user by ID - " + id);
 
     }
 }
