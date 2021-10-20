@@ -24,8 +24,8 @@ dependencies {
             'org.springframework.boot:spring-boot-starter-web',
             'org.projectlombok:lombok',
             'org.liquibase:liquibase-core',
-            'org.springdoc:springdoc-openapi-ui:1.4.6'
-            //'org.springframework.boot:spring-boot-starter-security'
+            'org.springdoc:springdoc-openapi-ui:1.4.6',
+            'org.springframework.boot:spring-boot-starter-security'
     )
     runtimeOnly(
             'com.h2database:h2:1.4.200',
