@@ -8,9 +8,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 
 
 @DataJpaTest
@@ -28,6 +30,7 @@ public class UserJpaRepositoryTests {
     }
 
     @Test
+    @Sql(scripts = "classpath:/data_sql/users.sql", executionPhase = BEFORE_TEST_METHOD)
     public void testGetUserByUserName() {
 
         final String username = "testUserName";
