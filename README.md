@@ -12,22 +12,11 @@ __Movienote__ – сервис для поиска фильма. Который 
   - Hibernate
   - PostgreSQL
   - Liquibase
+  - Spring Security
   
 - В планах:
-  - Spring Security
   - ELK stack
   
-## Tools
-
-Для запуска и работы с проектом Вам понадобятся следующие инструменты:
-
-* IntelliJ IDEA
-* Git
-* Java SE 15
-* Gradle
-* Postman
-* Postgres
-* Google Chrome (или другой браузер)
 
 ## Первый запуск программы в тестовом режиме
 
@@ -45,7 +34,9 @@ $ git clone https://github.com/AnastasiyaIlkevich/Movienote.git
   ```sh
 java -jar -DSpring.profiles.active=test Movienote-0.0.1-SNAPSHOT.jar
 ```
-  - Запустите браузер и введите http://localhost:8084/...
+  - Запустите браузер и введите http://localhost:8084/registration
+  - Зарегестрируйтесь и войдите
+  - Для тестирования rest controller пройдите по одному из ниже предложеных вариантов http://localhost:8084/"..."
   
 |Значение “...”|RestController|
 |----|-----|
