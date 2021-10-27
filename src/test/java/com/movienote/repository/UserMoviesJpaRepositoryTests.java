@@ -1,21 +1,21 @@
 package com.movienote.repository;
 
-import com.movienote.model.User;
 import com.movienote.model.UserMovies;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 
-import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
-
 import java.util.List;
+
+import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 
 
 @DataJpaTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestPropertySource(locations = "classpath:application-test.properties")
 public class UserMoviesJpaRepositoryTests {
 
@@ -30,15 +30,16 @@ public class UserMoviesJpaRepositoryTests {
     }
 
     @Test
+    @Order(1)
+    @Rollback(value = false)
     @Sql(scripts = "classpath:/data_sql/user_movies.sql", executionPhase = BEFORE_TEST_METHOD)
     public void testGetALLUserMoviesByUserId() {
 
-        final String username = "testUserName";
-        User user = new User();
-        user.setUsername(username);
+        long Id = 1L;
+        List<UserMovies> userMoviesList = userMoviesJpaRepository.findAllByUserId(Id);
+        Assertions.assertThat(userMoviesList.size()).isGreaterThan(0);
 
-        List<UserMovies> userMovies = userMoviesJpaRepository.findAllByUserId(user.getId());
-        Assertions.assertEquals(1, userMovies.size());
-        Assertions.assertEquals(user, userMovies.get(0));
+
+
     }
 }
