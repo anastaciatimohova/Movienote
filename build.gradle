@@ -27,6 +27,7 @@ dependencies {
             'org.springdoc:springdoc-openapi-ui:1.4.6',
             'org.springframework.boot:spring-boot-starter-security',
             'org.springframework.boot:spring-boot-starter-thymeleaf'
+
     )
     runtimeOnly(
             'com.h2database:h2:1.4.200',
