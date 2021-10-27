@@ -72,7 +72,7 @@ CREATE TABLE users
     id BIGSERIAL NOT NULL,
     username varchar(25) NOT NULL UNIQUE,
     email varchar(40) NOT NULL UNIQUE,
-    password varchar(40) NOT NULL
+    password varchar(255) NOT NULL
 );
 
 ALTER TABLE users ADD CONSTRAINT pk_user
@@ -98,3 +98,9 @@ ALTER TABLE user_roles ADD CONSTRAINT fk_user_roles_role
 
 ALTER TABLE user_roles ADD CONSTRAINT fk_user_roles_user
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+INSERT INTO roles
+VALUES (1, 'ROLE_USER');
+
+INSERT INTO roles
+VALUES (2, 'ROLE_ADMIN');
