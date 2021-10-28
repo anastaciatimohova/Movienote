@@ -7,6 +7,7 @@ import com.movienote.model.User;
 import com.movienote.repository.RoleJpaRepository;
 import com.movienote.repository.UserJpaRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,9 +31,12 @@ public class UserServiceImplementation implements UserService {
 
     private final RoleJpaRepository roleJpaRepository;
 
-    public UserServiceImplementation(UserJpaRepository userJpaRepository, RoleJpaRepository roleJpaRepository) {
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public UserServiceImplementation(UserJpaRepository userJpaRepository, RoleJpaRepository roleJpaRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userJpaRepository = userJpaRepository;
         this.roleJpaRepository = roleJpaRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
 
@@ -56,6 +60,8 @@ public class UserServiceImplementation implements UserService {
         Set<Role> roles = new HashSet<>();
         roles.add(roleJpaRepository.getByName("ROLE_USER"));
         user.setRoles(roles);
+
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
         userJpaRepository.save(user);
 
