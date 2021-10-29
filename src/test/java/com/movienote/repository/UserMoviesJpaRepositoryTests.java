@@ -2,10 +2,10 @@ package com.movienote.repository;
 
 import com.movienote.model.UserMovies;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 
@@ -15,7 +15,6 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TE
 
 
 @DataJpaTest
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestPropertySource(locations = "classpath:application-test.properties")
 public class UserMoviesJpaRepositoryTests {
 
@@ -30,15 +29,12 @@ public class UserMoviesJpaRepositoryTests {
     }
 
     @Test
-    @Order(1)
-    @Rollback(value = false)
     @Sql(scripts = "classpath:/data_sql/user_movies.sql", executionPhase = BEFORE_TEST_METHOD)
     public void testGetALLUserMoviesByUserId() {
 
-        long Id = 1L;
+        long Id = 1;
         List<UserMovies> userMoviesList = userMoviesJpaRepository.findAllByUserId(Id);
         Assertions.assertThat(userMoviesList.size()).isGreaterThan(0);
-
 
 
     }

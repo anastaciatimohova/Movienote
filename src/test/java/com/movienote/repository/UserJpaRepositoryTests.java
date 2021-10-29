@@ -33,7 +33,7 @@ public class UserJpaRepositoryTests {
     @Sql(scripts = "classpath:/data_sql/users.sql", executionPhase = BEFORE_TEST_METHOD)
     public void testGetUserByUserName() {
 
-        final String username = "testUserName";
+        final String username = "TestUsername";
         User user = new User();
         user.setUsername(username);
         user.setEmail((RandomString.make(10)));
