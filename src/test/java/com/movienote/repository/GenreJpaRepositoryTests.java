@@ -33,7 +33,7 @@ public class GenreJpaRepositoryTests {
     @Sql(scripts = "classpath:/data_sql/genres.sql", executionPhase = BEFORE_TEST_METHOD)
     public void testGetGenreByName() {
 
-        final String genreName = "testGenre";
+        final String genreName = "Thriller";
         Genre genre = new Genre();
         genre.setName(genreName);
         genreJpaRepository.save(genre);

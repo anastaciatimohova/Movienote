@@ -31,7 +31,7 @@ public class RoleJpaRepositoryTests {
     @Sql(scripts = "classpath:/data_sql/roles.sql", executionPhase = BEFORE_TEST_METHOD)
     public void testGetRoleByName() {
 
-        final String roleName = "testRoleName";
+        final String roleName = "USER";
         Role role = new Role();
         role.setName(roleName);
 

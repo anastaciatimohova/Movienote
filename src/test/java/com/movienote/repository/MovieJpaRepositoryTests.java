@@ -32,7 +32,7 @@ public class MovieJpaRepositoryTests {
     @Sql(scripts = "classpath:/data_sql/movies.sql", executionPhase = BEFORE_TEST_METHOD)
     public void testGetMovieByTitle() {
 
-        final String movieTitle = "testMovieTitle";
+        final String movieTitle = "Matrix";
         Movie movie = new Movie();
         movie.setTitle(movieTitle);
 

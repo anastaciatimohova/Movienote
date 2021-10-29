@@ -31,7 +31,7 @@ public class StatusJpaRepositoryTests {
     @Sql(scripts = "classpath:/data_sql/statuses.sql", executionPhase = BEFORE_TEST_METHOD)
     public void testGetStatusByName() {
 
-        final String statusName = "testStatusName";
+        final String statusName = "Viewed";
         Status status = new Status();
         status.setName(statusName);
 
