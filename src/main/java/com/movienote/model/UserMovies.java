@@ -2,13 +2,16 @@ package com.movienote.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.Instant;
 
 
 /**
  * Объект представляющий связи между объктами
+ *
  * @version 1.0
  * @autor Ilkevich Anastasiya
  */
@@ -43,8 +46,12 @@ public class UserMovies {
     @JoinColumn(name = "movie_id", referencedColumnName = "id")
     private Movie movie;
 
-    @ManyToOne()
-    @JoinColumn(name = "status_id", referencedColumnName = "id")
+    @Enumerated
     private Status status;
+
+    @PreUpdate
+    public void preUpdate() {
+        modifiedTimestamp = new Timestamp(Instant.now().toEpochMilli());
+    }
 
 }

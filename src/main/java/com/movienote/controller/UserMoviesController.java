@@ -32,7 +32,6 @@ public class UserMoviesController {
 
     @GetMapping()
     public UserMovies getUserMovies(@RequestParam ("id") Long id){
-
         return userMoviesService.getById(id);
     }
 

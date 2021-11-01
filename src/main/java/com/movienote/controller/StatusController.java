@@ -29,33 +29,6 @@ public class StatusController {
         return statusService.getAll();
     }
 
-    @GetMapping("/{name}")
-    public Status getStatus(@PathVariable("name") String name) {
-
-        return statusService.getByName(name);
-    }
-
-    @PostMapping("/{name}")
-    public void saveStatus(@PathVariable("name") String name) {
-
-        statusService.save(name);
-
-    }
-
-    @PutMapping()
-    public Status updateStatus(@RequestBody Status status) {
-
-        return statusService.change(status);
-
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteStatus(@PathVariable("id") Long id) {
-
-        statusService.delete(id);
-
-    }
-
 }
 
 

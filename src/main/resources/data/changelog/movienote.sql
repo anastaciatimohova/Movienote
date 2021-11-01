@@ -37,21 +37,12 @@ CREATE TABLE roles
 ALTER TABLE roles ADD CONSTRAINT pk_role
     PRIMARY KEY (id);
 
-CREATE TABLE statuses
-(
-    id BIGSERIAL NOT NULL,
-    name varchar(100)
-);
-
-ALTER TABLE statuses ADD CONSTRAINT pk_status
-    PRIMARY KEY (id);
-
 CREATE TABLE user_movies
 (
     id BIGSERIAL NOT NULL,
     user_id bigint NOT NULL,
     movie_id bigint NOT NULL,
-    status_id bigint NOT NULL,
+    status INT NOT NULL DEFAULT 1,
     description text,
     rating integer,
     created_timestamp timestamp DEFAULT NOW(),
@@ -89,9 +80,6 @@ ALTER TABLE user_movies ADD CONSTRAINT fk_user_movies_user
 
 ALTER TABLE user_movies ADD CONSTRAINT fk_user_movies_movie
     FOREIGN KEY (movie_id) REFERENCES movies (id) ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE user_movies ADD CONSTRAINT fk_user_movies_status
-    FOREIGN KEY (status_id) REFERENCES statuses (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE user_roles ADD CONSTRAINT fk_user_roles_role
     FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE ON UPDATE CASCADE;

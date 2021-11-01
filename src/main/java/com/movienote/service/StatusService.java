@@ -16,12 +16,4 @@ import java.util.List;
 public interface StatusService {
 
     List<Status> getAll();
-
-    Status getByName(String name);
-
-    void save(String name);
-
-    Status change(Status status);
-
-    void delete(Long id);
 }

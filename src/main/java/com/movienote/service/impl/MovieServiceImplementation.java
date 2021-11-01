@@ -1,8 +1,9 @@
 
-package com.movienote.service;
+package com.movienote.service.impl;
 
 import com.movienote.model.Movie;
 import com.movienote.repository.MovieJpaRepository;
+import com.movienote.service.MovieService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

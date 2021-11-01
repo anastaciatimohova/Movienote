@@ -1,11 +1,12 @@
 
-package com.movienote.service;
+package com.movienote.service.impl;
 
 
 import com.movienote.model.Role;
 import com.movienote.model.User;
 import com.movienote.repository.RoleJpaRepository;
 import com.movienote.repository.UserJpaRepository;
+import com.movienote.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

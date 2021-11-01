@@ -1,4 +1,4 @@
-package com.movienote.service;
+package com.movienote.service.impl;
 
 import com.movienote.model.Role;
 import com.movienote.model.User;
