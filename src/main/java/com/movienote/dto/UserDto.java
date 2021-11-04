@@ -1,6 +1,7 @@
 package com.movienote.dto;
 
-import com.movienote.model.Role;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.movienote.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
 
     private String username;
@@ -16,6 +18,23 @@ public class UserDto {
 
     private String password;
 
-    private Role role;
 
+    public User toUser(UserDto userDto) {
+
+        User user = new User();
+        user.setUsername(userDto.getUsername());
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
+
+        return user;
+    }
+
+    public UserDto toDto(User user) {
+
+        UserDto userDto = new UserDto();
+        userDto.setUsername(user.getUsername());
+        userDto.setEmail(user.getEmail());
+        userDto.setPassword(user.getPassword());
+        return userDto;
+    }
 }
