@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.movienote.model.Genre;
 import com.movienote.model.Movie;
+import com.movienote.model.Status;
 import com.movienote.model.User;
 import com.movienote.repository.GenreJpaRepository;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.validation.constraints.Pattern;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -37,6 +39,9 @@ public class MovieDto {
     private Long externalId;
     @JsonProperty("genre_ids")
     private List<Long> genreIds;
+    private Integer rating;
+    private Status status;
+    private String description;
 
     @Autowired
     private GenreJpaRepository genreJpaRepository;
