@@ -31,4 +31,5 @@ public class Genre {
     @ManyToMany(mappedBy = "genres")
     private Set<Movie> movies;
 
+
 }
