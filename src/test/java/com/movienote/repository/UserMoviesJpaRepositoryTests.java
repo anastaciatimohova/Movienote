@@ -15,7 +15,7 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TE
 
 
 @DataJpaTest
-@TestPropertySource(locations = "classpath:application-test.properties")
+@TestPropertySource(locations = "classpath:application-dev.properties")
 public class UserMoviesJpaRepositoryTests {
 
     @Autowired

@@ -14,7 +14,7 @@ import java.util.List;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 
 @DataJpaTest
-@TestPropertySource(locations = "classpath:application-test.properties")
+@TestPropertySource(locations = "classpath:application-dev.properties")
 public class StatusJpaRepositoryTests {
 
     @Autowired
