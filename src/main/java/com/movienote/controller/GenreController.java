@@ -2,6 +2,8 @@ package com.movienote.controller;
 
 import com.movienote.model.Genre;
 import com.movienote.service.GenreService;
+import lombok.AllArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,14 +16,11 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/genre")
+@AllArgsConstructor
+@RequestMapping("/genres")
 public class GenreController {
 
     private final GenreService genreService;
-
-    public GenreController(GenreService genreService) {
-        this.genreService = genreService;
-    }
 
     @GetMapping()
     public List<Genre> getAllGenres() {
@@ -48,10 +47,10 @@ public class GenreController {
     }
 
     @DeleteMapping("/{id}")
+    @Secured(value = "ROLE_ADMIN")
     public void deleteGenre(@PathVariable("id") Long id) {
 
         genreService.delete(id);
-
     }
 }
 

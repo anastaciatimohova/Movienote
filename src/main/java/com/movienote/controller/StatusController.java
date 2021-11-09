@@ -2,6 +2,7 @@ package com.movienote.controller;
 
 import com.movienote.model.Status;
 import com.movienote.service.StatusService;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,14 +15,11 @@ import java.util.List;
  */
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/status")
 public class StatusController {
 
     private final StatusService statusService;
-
-    public StatusController(StatusService statusService) {
-        this.statusService = statusService;
-    }
 
     @GetMapping()
     public List<Status> getAllStatuses() {

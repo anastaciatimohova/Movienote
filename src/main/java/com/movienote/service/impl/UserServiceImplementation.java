@@ -7,6 +7,7 @@ import com.movienote.model.User;
 import com.movienote.repository.RoleJpaRepository;
 import com.movienote.repository.UserJpaRepository;
 import com.movienote.service.UserService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,33 +27,23 @@ import java.util.Set;
 @Slf4j
 @Transactional
 @Service
+@AllArgsConstructor
 public class UserServiceImplementation implements UserService {
 
     private final UserJpaRepository userJpaRepository;
-
     private final RoleJpaRepository roleJpaRepository;
-
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    public UserServiceImplementation(UserJpaRepository userJpaRepository, RoleJpaRepository roleJpaRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.userJpaRepository = userJpaRepository;
-        this.roleJpaRepository = roleJpaRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
-
 
     @Override
     public List<User> getAll() {
 
         return userJpaRepository.findAll();
-
     }
 
     @Override
     public User getByName(String username) {
 
         return userJpaRepository.findByUsername(username);
-
     }
 
     @Override
@@ -61,13 +52,9 @@ public class UserServiceImplementation implements UserService {
         Set<Role> roles = new HashSet<>();
         roles.add(roleJpaRepository.getByName("ROLE_USER"));
         user.setRoles(roles);
-
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-
         userJpaRepository.save(user);
-
         log.info("save new user " + user);
-
     }
 
     @Override
@@ -76,15 +63,10 @@ public class UserServiceImplementation implements UserService {
         boolean userDBId = userJpaRepository.existsById(user.getId());
 
         if (userDBId) {
-
             userJpaRepository.save(user);
-
             log.info("update user " + user);
-
-        }else {
-
+        } else {
             log.warn("user with such id does not exist " + user);
-
         }
         return user;
     }
@@ -93,8 +75,6 @@ public class UserServiceImplementation implements UserService {
     public void delete(Long id) {
 
         userJpaRepository.deleteById(id);
-
         log.info("delete user by ID - " + id);
-
     }
 }
