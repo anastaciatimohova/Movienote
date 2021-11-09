@@ -7,7 +7,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MovienoteApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MovienoteApplication.class, args);
+        try {
+            SpringApplication.run(MovienoteApplication.class, args);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //SpringApplication.run(MovienoteApplication.class, args);
     }
 
 }

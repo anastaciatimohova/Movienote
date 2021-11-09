@@ -23,7 +23,7 @@ public class StatusServiceImplementation implements StatusService {
 
     @Override
     public List<Status> getAll() {
+
         return Arrays.asList(Status.values());
     }
-
 }

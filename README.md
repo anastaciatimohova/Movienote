@@ -32,7 +32,7 @@ $ git clone https://github.com/AnastasiyaIlkevich/Movienote.git
 	- откройте папку с проектом …\Movienote\build\libs
 	- Запустите командную строку в этой папке и введите для старта команду:
   ```sh
-java -jar -DSpring.profiles.active=dev Movienote-0.0.1-SNAPSHOT.jar
+java -jar -DSpring.profiles.active=test Movienote-0.0.1-SNAPSHOT.jar
 ```
   - Запустите браузер и введите http://localhost:8084/registration
   - Зарегестрируйтесь и войдите
@@ -67,10 +67,3 @@ __RequestBody__ :
 
 ### Method : DELETE
 localhost:8084/user/{id} - удаляет пользователя по ID в БД
-
-
-Access address to UI Swagger
-  ```sh
-http://localhost:8080/swagger-ui/index.html
-```
-

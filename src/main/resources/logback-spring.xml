@@ -5,7 +5,7 @@
     <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
 
     <springProfile name="dev,test">
-        <root level="INFO">
+        <root level="info">
             <appender-ref ref="CONSOLE"/>
         </root>
     </springProfile>

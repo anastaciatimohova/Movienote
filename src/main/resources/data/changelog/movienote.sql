@@ -92,3 +92,14 @@ VALUES (1, 'ROLE_USER');
 
 INSERT INTO roles
 VALUES (2, 'ROLE_ADMIN');
+
+INSERT INTO users (id, username, email, password)
+VALUES (1, 'admin', 'admin@email.com', 'admin');
+
+INSERT INTO users (id, username, email, password)
+VALUES (2, 'user', 'user@email.com', 'user');
+
+INSERT INTO user_roles (user_id, role_id) VALUES (1, 2);
+
+INSERT INTO user_roles (user_id, role_id) VALUES (2, 1);
+
