@@ -1,6 +1,7 @@
 package com.movienote.exception;
 
 public class MovienoteServiceException extends RuntimeException{
+
     public MovienoteServiceException() {
     }
 
