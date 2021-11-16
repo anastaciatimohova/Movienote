@@ -17,26 +17,26 @@ public class ApiExceptionHandler {
 
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
 
-        ApiExceptionErrorDetails apiExceptionErrorDetails = new ApiExceptionErrorDetails(
+        ErrorDetails errorDetails = new ErrorDetails(
                 e.getMessage(),
                 badRequest,
                 ZonedDateTime.now(ZoneId.of("Z"))
         );
-        return new ResponseEntity<>(apiExceptionErrorDetails, badRequest);
+        return new ResponseEntity<>(errorDetails, badRequest);
     }
 
     //handle specific exception
-    @ExceptionHandler(value = {MovienoteServiceException.class})
-    public ResponseEntity<Object> handleMovienoteServiceException(MovienoteServiceException e) {
+    @ExceptionHandler(value = {ApiMovienoteServiceException.class})
+    public ResponseEntity<Object> handleMovienoteServiceException(ApiMovienoteServiceException e) {
 
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
 
-        ApiExceptionErrorDetails apiExceptionErrorDetails = new ApiExceptionErrorDetails(
+        ErrorDetails errorDetails = new ErrorDetails(
                 e.getMessage(),
                 badRequest,
                 ZonedDateTime.now(ZoneId.of("Z"))
         );
-        return new ResponseEntity<>(apiExceptionErrorDetails, badRequest);
+        return new ResponseEntity<>(errorDetails, badRequest);
     }
 
     //handle global exception
@@ -45,11 +45,11 @@ public class ApiExceptionHandler {
 
         HttpStatus internalServerError = HttpStatus.INTERNAL_SERVER_ERROR;
 
-        ApiExceptionErrorDetails apiExceptionErrorDetails = new ApiExceptionErrorDetails(
+        ErrorDetails errorDetails = new ErrorDetails(
                 e.getMessage(),
                 internalServerError,
                 ZonedDateTime.now(ZoneId.of("Z"))
         );
-        return new ResponseEntity<>(apiExceptionErrorDetails, internalServerError);
+        return new ResponseEntity<>(errorDetails, internalServerError);
     }
 }
