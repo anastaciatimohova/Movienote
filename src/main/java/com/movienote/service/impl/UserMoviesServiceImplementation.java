@@ -2,7 +2,7 @@
 package com.movienote.service.impl;
 
 
-import com.movienote.exception.MovienoteServiceException;
+import com.movienote.exception.ApiMovienoteServiceException;
 import com.movienote.model.UserMovies;
 import com.movienote.repository.UserMoviesJpaRepository;
 import com.movienote.service.UserMoviesService;
@@ -36,7 +36,7 @@ public class UserMoviesServiceImplementation implements UserMoviesService {
     @Override
     public UserMovies getById(Long id) {
         return userMoviesJpaRepository.findById(id)
-                .orElseThrow(() -> new MovienoteServiceException(String.format("No such movie with id: %s", id)));
+                .orElseThrow(() -> new ApiMovienoteServiceException(String.format("No such movie with id: %s", id)));
     }
 
     @Override
