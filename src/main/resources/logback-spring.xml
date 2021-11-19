@@ -6,7 +6,7 @@
 
     <property name="LOGS" value="./logs" />
 
-    <springProfile name="dev">
+    <springProfile name="dev,prod">
         <root level="info">
             <layout
                     class="ch.qos.logback.classic.PatternLayout">
