@@ -49,7 +49,6 @@ public class UserController {
         return userService.update(user);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable("id") Long id) {
 

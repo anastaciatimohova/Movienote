@@ -28,7 +28,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
 
     @Override
-    @Profile("dev")
     protected void configure(HttpSecurity http) throws Exception {
 
         http

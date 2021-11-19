@@ -4,6 +4,7 @@ import com.movienote.model.Genre;
 import com.movienote.service.GenreService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class GenreController {
     }
 
     @DeleteMapping("/{id}")
-    @Secured(value = "ROLE_ADMIN")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteGenre(@PathVariable("id") Long id) {
 
         genreService.delete(id);
