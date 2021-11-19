@@ -42,6 +42,7 @@ public class MovieDto {
     private Integer rating;
     private Status status;
     private String description;
+    private String query;
 
     @Autowired
     private GenreJpaRepository genreJpaRepository;
