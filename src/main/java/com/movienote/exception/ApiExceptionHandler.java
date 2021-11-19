@@ -15,8 +15,8 @@ public class ApiExceptionHandler {
 
 
     //handle specific exception
-    @ExceptionHandler(value = {ApiRequestException.class})
-    public ResponseEntity<Object> handleApiRequestException(ApiRequestException e) {
+    @ExceptionHandler(value = {RequestException.class})
+    public ResponseEntity<Object> handleApiRequestException(RequestException e) {
 
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
 
@@ -26,14 +26,14 @@ public class ApiExceptionHandler {
                 ZonedDateTime.now(ZoneId.of("Z"))
         );
 
-        log.error("Caught ResourceNotFoundException: - {}",e.getMessage());
+        log.error("Caught RequestException: - {}",e.getMessage());
 
         return new ResponseEntity<>(errorDetails, badRequest);
     }
 
     //handle specific exception
-    @ExceptionHandler(value = {ApiMovienoteServiceException.class})
-    public ResponseEntity<Object> handleMovienoteServiceException(ApiMovienoteServiceException e) {
+    @ExceptionHandler(value = {MovienoteServiceException.class})
+    public ResponseEntity<Object> handleMovienoteServiceException(MovienoteServiceException e) {
 
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
 
