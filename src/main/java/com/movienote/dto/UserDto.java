@@ -2,13 +2,9 @@ package com.movienote.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.movienote.model.User;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
 
