@@ -30,7 +30,7 @@ public class Movie {
     private Long id;
 
     @Column(name = "adult")
-    private boolean adult;
+    private Boolean adult;
 
     @Column(name = "backdrop_path")
     private String poster;
